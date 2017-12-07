@@ -1861,8 +1861,8 @@ public class ActiveMQServerControlTest extends ManagementTestBase {
          JsonArray array = (JsonArray) consumersAsJsonObject.get("data");
 
          Assert.assertEquals("number of consumers returned from query", 2, array.size());
-         Assert.assertEquals("check consumer's queue", queueName1.toString(), array.getJsonObject(0).getString("queue"));
-         Assert.assertEquals("check consumer's queue", queueName1.toString(), array.getJsonObject(0).getString("queue"));
+         Assert.assertEquals("check consumer's queue", queueName1.toString(), array.getJsonObject(0).getString("queueName"));
+         Assert.assertEquals("check consumer's queue", queueName1.toString(), array.getJsonObject(0).getString("queueName"));
 
          // test with a CONTAINS operation
          filterString = createJsonFilter("queue", "CONTAINS", "my_queue");
@@ -1879,8 +1879,8 @@ public class ActiveMQServerControlTest extends ManagementTestBase {
          array = (JsonArray) consumersAsJsonObject.get("data");
 
          Assert.assertEquals("number of consumers returned from query", 2, array.size());
-         Assert.assertEquals("check consumers address", addressName1.toString(), array.getJsonObject(0).getString("address"));
-         Assert.assertEquals("check consumers address", addressName1.toString(), array.getJsonObject(1).getString("address"));
+         Assert.assertEquals("check consumers address", addressName1.toString(), array.getJsonObject(0).getString("queueAddress"));
+         Assert.assertEquals("check consumers address", addressName1.toString(), array.getJsonObject(1).getString("queueAddress"));
 
          //test with empty filter - all consumers should be returned
          filterString = createJsonFilter("", "", "");
@@ -1905,9 +1905,9 @@ public class ActiveMQServerControlTest extends ManagementTestBase {
 
          Assert.assertEquals("number of consumers returned from query", 1, array.size());
          JsonObject jsonConsumer = array.getJsonObject(0);
-         Assert.assertEquals("queue name in consumer", queueName3.toString(), jsonConsumer.getString("queue"));
-         Assert.assertEquals("address name in consumer", addressName2.toString(), jsonConsumer.getString("address"));
-         Assert.assertEquals("consumer protocol ", "CORE", jsonConsumer.getString("protocol"));
+         Assert.assertEquals("queue name in consumer", queueName3.toString(), jsonConsumer.getString("queueName"));
+         Assert.assertEquals("address name in consumer", addressName2.toString(), jsonConsumer.getString("queueAddress"));
+         Assert.assertEquals("consumer protocol ", "CORE", jsonConsumer.getString("connectionProtocolName"));
          Assert.assertEquals("queue type", "anycast", jsonConsumer.getString("queueType"));
 
       }
